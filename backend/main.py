@@ -11,11 +11,11 @@ from langchain_openai import OpenAI
 from langchain.output_parsers import PydanticOutputParser
 from langchain.chat_models import ChatOpenAI
 
-from .db import get_database 
+from db import get_database 
 from bson import ObjectId
 import json 
 from fastapi import HTTPException
-from .routers import auth
+from routers import auth
 
 #pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
 #from routers import auth 
@@ -123,6 +123,8 @@ def generate_quiz(userInput: UserInput):
         template='''Create a difficult multiple choice question in the format specified based on 
         the following text. The output should be a flat JSON object with the following fields: 
         "question", "answer1", "answer2", "answer3", "answer4", "correct_answer". 
+        The correct answer should be random and not the same answer over and over again. 
+        The "correct_answer" field should contain the key of the correct answer (e.g., "answer1", "answer2").
         \n{format_instructions} \n{query}''',
         input_variables=["query"],
         partial_variables={"format_instructions": parser.get_format_instructions()}

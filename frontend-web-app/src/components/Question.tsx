@@ -11,15 +11,15 @@ type QuestionProps = {
 const Question: React.FC<QuestionProps> = ({ question, index }) => {
   const [answerSelected, setAnswerSelected] = useState(0);
 
-  const handleClick = (answer: string, correctAnswer:string ) => {
-    if (answer === correctAnswer) {
+  const handleClick = (answerKey: string, correctAnswerKey:string ) => {
+    if (answerKey === correctAnswerKey) {
       console.log("correct Answer was selected");
       setAnswerSelected(2);
     } else {
       setAnswerSelected(1);
       console.log("Incorrect answer selected");
-      console.log("correct answer: " + correctAnswer);
-      console.log("incorrect answer: " + answer);
+      console.log("correct answer: " + correctAnswerKey);
+      console.log("incorrect answer: " + answerKey);
     }
   };
 
@@ -33,32 +33,40 @@ const Question: React.FC<QuestionProps> = ({ question, index }) => {
       </h3>
       <AnswerButton
         answer={question.answer1}
-        correctAnswer={question.correct_answer}
+        answerKey={"answer1"}
+        correctAnswerKey={question.correct_answer}
         handleClick={handleClick}
       >
         A
       </AnswerButton>
+
       <AnswerButton
         answer={question.answer2}
-        correctAnswer={question.correct_answer}
+        answerKey={"answer2"}
+        correctAnswerKey={question.correct_answer}
         handleClick={handleClick}
       >
         B
       </AnswerButton>
+
       <AnswerButton
         answer={question.answer3}
-        correctAnswer={question.correct_answer}
+        answerKey={"answer3"}
+        correctAnswerKey={question.correct_answer}
         handleClick={handleClick}
       >
         C
       </AnswerButton>
+
       <AnswerButton
         answer={question.answer4}
-        correctAnswer={question.correct_answer}
+        answerKey={"answer4"}
+        correctAnswerKey={question.correct_answer}
         handleClick={handleClick}
       >
         D
       </AnswerButton>
+      
       {answerSelected > 0 ? (
         answerSelected === 2 ? (
           <>
